@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="run" name="compile and run java project" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<target name="run" depends="compile">
+		<java classname="mainpackage.Start">
+			<classpath path="target"/>
+		</java>
+	</target>
+
+	<target name="compile">
+		<javac includeantruntime="false" srcdir="./src/src/mainpackage" destdir="target" />
+	</target>
+
+	
+	<target name="test" depends="compile">
+	    <junit>
+	        <batchtest>
+	            <fileset dir="./src/test" includes="" />
+	        </batchtest>
+	        <formatter type="plain" usefile="false" />
+	        <formatter type="plain" /> 
+	    </junit>
+	</target>
+	
+
+	<target name="install-ivy" description="Install ivy">
+	    <mkdir dir="./lib/ivy"/>
+	    <get dest="./lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"/>
+	</target>
+	
+    <target name="clean" description="Delete all generated files" depends="compile">
+        <delete file="*.xml"/>
+    </target>
+
+
+
+</project>
